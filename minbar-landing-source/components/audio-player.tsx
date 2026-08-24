@@ -23,21 +23,35 @@ export function AudioPlayerProvider({ children }: { children: React.ReactNode })
 
   useEffect(() => {
     if (!playing || !current) return;
-    if (current.audioUrl) {
-      if (!audioRef.current || audioRef.current.src !== current.audioUrl) {
-        audioRef.current?.pause();
-        audioRef.current = new Audio(current.audioUrl);
-      }
-      void audioRef.current.play().catch(() => setPlaying(false));
-      const onTime = () => {
-        const audio = audioRef.current;
-        if (audio?.duration) setProgress((audio.currentTime / audio.duration) * 100);
-      };
-      audioRef.current.addEventListener("timeupdate", onTime);
-      return () => audioRef.current?.removeEventListener("timeupdate", onTime);
+    if (!current.audioUrl) return;
+
+    const expectedUrl = new URL(current.audioUrl, window.location.href).href;
+    if (!audioRef.current || audioRef.current.src !== expectedUrl) {
+      audioRef.current?.pause();
+      audioRef.current = new Audio(current.audioUrl);
+      audioRef.current.preload = "metadata";
     }
-    const timer = window.setInterval(() => setProgress((value) => (value >= 99.8 ? 0 : value + 0.08)), 1000);
-    return () => window.clearInterval(timer);
+
+    const audio = audioRef.current;
+    const onTime = () => {
+      if (audio.duration) setProgress((audio.currentTime / audio.duration) * 100);
+    };
+    const onEnded = () => {
+      setPlaying(false);
+      setProgress(100);
+    };
+    const onError = () => setPlaying(false);
+
+    audio.addEventListener("timeupdate", onTime);
+    audio.addEventListener("ended", onEnded);
+    audio.addEventListener("error", onError);
+    void audio.play().catch(() => setPlaying(false));
+
+    return () => {
+      audio.removeEventListener("timeupdate", onTime);
+      audio.removeEventListener("ended", onEnded);
+      audio.removeEventListener("error", onError);
+    };
   }, [playing, current]);
 
   useEffect(() => {
@@ -78,7 +92,7 @@ export function PlayButton({ track, label, large = false }: { track: Khutba; lab
   const active = current?.id === track.id && playing;
   const buttonLabel = active ? "Пауза" : (label ?? "Слушать");
   return (
-    <button className={`play-button${large ? " play-button-large" : ""}${active ? " is-playing" : ""}`} onClick={() => toggle(track)} aria-label={`${buttonLabel}: ${track.title}`}>
+    <button className={`play-button${large ? " play-button-large" : ""}${active ? " is-playing" : ""}`} onClick={() => toggle(track)} aria-label={`${buttonLabel}: ${track.title}`} disabled={!track.audioUrl} title={track.audioUrl ? undefined : "Аудио пока не загружено"}>
       {active ? <PauseIcon /> : <PlayIcon />}{large && <span>{buttonLabel}</span>}
     </button>
   );

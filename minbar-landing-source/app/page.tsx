@@ -1,23 +1,20 @@
 import Link from "next/link";
-import { HomeStats } from "@/components/home-stats";
-import { RamadanCountdown } from "@/components/ramadan-countdown";
-import { getArchiveStats } from "@/lib/archive-stats";
+import { PlayButton } from "@/components/audio-player";
 import { loadKhutbas } from "@/lib/supabase-khutbas";
 
 export default async function Home() {
   const khutbas = await loadKhutbas();
-  const stats = getArchiveStats(khutbas);
+  const featured = khutbas.find((khutba) => khutba.audioUrl) ?? khutbas[0];
 
   return (
     <main>
       <section className="hero section-shell">
         <img className="moon-visual" src="/moon-3d.png" alt="" aria-hidden="true" />
         <div className="hero-copy">
-          <p className="eyebrow">Хутбы, которые легко найти и слушать</p>
+          <p className="eyebrow">Аудиоархив пятничных хутб</p>
           <h1>Слушайте.<br />Размышляйте.<br /><em>Делитесь.</em></h1>
           <p className="hero-lead">
-            Собираем записи из мечетей разных городов. Находите хутбу по языку,
-            имаму или мечети — и слушайте в удобное время.
+            Находите записи по городу, мечети или имаму и слушайте их в удобное время.
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" href="/archive">Открыть архив</Link>
@@ -25,15 +22,30 @@ export default async function Home() {
           </div>
         </div>
 
-        <RamadanCountdown />
+        {featured && (
+          <article className="featured" aria-label="Запись для прослушивания">
+            <div className="featured-topline"><span>Послушать сейчас</span><span>{featured.duration}</span></div>
+            <div className="featured-body">
+              <span className="language-tag">{featured.language}</span>
+              <h2>{featured.title}</h2>
+              <p>{featured.summary}</p>
+            </div>
+            <div className="featured-meta">
+              <div><span>Имам</span><strong>{featured.imam}</strong></div>
+              <div><span>Мечеть</span><strong>{featured.mosque} · {featured.city}</strong></div>
+            </div>
+            <div className="featured-controls">
+              <PlayButton track={featured} label="Слушать" large />
+              <Link href={`/khutba/${featured.id}`}>Открыть запись</Link>
+            </div>
+          </article>
+        )}
       </section>
 
-      <HomeStats recordings={stats.recordings} mosques={stats.mosques} cities={stats.cities} languages={stats.languages} />
-
       <section className="section-shell contribute">
-        <div><p className="eyebrow">Добавить в Minbar</p><h2>У вас есть запись хутбы?</h2></div>
+        <div><p className="eyebrow">Пополнить архив</p><h2>Есть запись хутбы?</h2></div>
         <div className="contribute-copy">
-          <p>Загрузите MP3 и укажите мечеть, имама, город и дату. После проверки запись появится в общем архиве.</p>
+          <p>Загрузите MP3 и основные данные. После проверки запись появится в архиве.</p>
           <div className="contribute-actions"><Link className="button button-primary" href="/upload">Загрузить хутбу</Link><a className="text-link" href="https://t.me/hwee1r" target="_blank" rel="noreferrer">По сотрудничеству <span aria-hidden="true">↗</span></a></div>
         </div>
       </section>

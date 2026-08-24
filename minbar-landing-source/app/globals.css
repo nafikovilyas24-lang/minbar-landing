@@ -99,14 +99,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .text-link span { margin-left: 8px; color: var(--accent); transition: margin 160ms ease; }
 .text-link:hover span { margin-left: 12px; }
 
-.hero { position: relative; isolation: isolate; min-height: 570px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(48px, 7vw, 92px); align-items: center; padding-block: 58px 66px; }
-.hero-copy, .hero .ramadan-card { position: relative; z-index: 2; }
+.hero { position: relative; isolation: isolate; min-height: 540px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(48px, 7vw, 92px); align-items: center; padding-block: 52px 58px; }
+.hero-copy, .hero .featured { position: relative; z-index: 2; }
 .hero-copy { padding-bottom: 18px; }
-.hero-copy h1 { margin: 23px 0 26px; font-size: clamp(3.3rem, 5.7vw, 5.45rem); line-height: 0.98; letter-spacing: -0.067em; font-weight: 610; }
+.hero-copy h1 { margin: 21px 0 24px; font-size: clamp(3rem, 5.1vw, 4.85rem); line-height: 1; letter-spacing: -0.06em; font-weight: 610; }
 .hero-copy h1 em { color: var(--green); font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
 .hero-lead { max-width: 590px; margin: 0; color: var(--muted); font-size: 1.08rem; line-height: 1.75; }
 .hero-actions { display: flex; align-items: center; gap: 30px; margin-top: 38px; }
-.moon-visual { position: absolute; z-index: 1; top: 1%; left: 45%; width: clamp(230px, 31vw, 430px); height: auto; opacity: 0.48; pointer-events: none; transform-style: preserve-3d; filter: drop-shadow(0 22px 42px rgba(0, 0, 0, 0.3)); animation: moon-turn 14s ease-in-out infinite; }
+.moon-visual { position: absolute; z-index: 1; top: 2%; left: 43%; width: clamp(230px, 30vw, 410px); height: auto; opacity: 0.3; pointer-events: none; transform-style: preserve-3d; filter: drop-shadow(0 22px 42px rgba(0, 0, 0, 0.3)); animation: moon-turn 14s ease-in-out infinite; }
 @keyframes moon-turn {
   0%, 100% { transform: perspective(900px) rotateX(-7deg) rotateY(-14deg) rotateZ(-3deg) translateY(0); }
   50% { transform: perspective(900px) rotateX(7deg) rotateY(14deg) rotateZ(4deg) translateY(-11px); }
@@ -127,6 +127,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 .play-button { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; border: 1px solid var(--line-light); border-radius: 50%; background: transparent; color: var(--ink); transition: background 160ms ease, border-color 160ms ease, color 160ms ease; }
 .play-button:hover, .play-button.is-playing { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.play-button:disabled { opacity: 0.28; cursor: not-allowed; }
+.play-button:disabled:hover { background: transparent; border-color: var(--line-light); color: var(--ink); }
 .play-button-large { width: auto; height: 48px; border-radius: 7px; padding: 0 21px 0 16px; gap: 10px; background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-size: 0.88rem; font-weight: 700; }
 
 .latest-section { padding-block: 100px 112px; border-top: 1px solid var(--line); }
@@ -175,7 +177,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .row-arrow { color: var(--subtle); font-size: 1rem; }
 .khutba-row:hover .row-arrow { color: var(--accent); }
 
-.contribute { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(55px, 8vw, 105px); padding-block: 84px 94px; }
+.contribute { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(55px, 8vw, 105px); padding-block: 68px 78px; border-top: 1px solid var(--line); }
 .contribute h2 { max-width: 620px; margin: 16px 0 0; font-size: clamp(2.5rem, 4.3vw, 4.15rem); line-height: 1.08; letter-spacing: -0.06em; font-weight: 540; }
 .contribute-copy { align-self: end; }
 .contribute-copy p { margin: 0 0 28px; color: var(--muted); line-height: 1.78; }

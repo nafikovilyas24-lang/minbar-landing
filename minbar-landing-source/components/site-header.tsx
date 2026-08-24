@@ -26,9 +26,7 @@ export function SiteHeader() {
         <Brand />
         <nav className={`main-nav${open ? " is-open" : ""}`} aria-label="Главная навигация">
           <div className="mobile-nav-top"><Brand /><button className="icon-button" onClick={close} aria-label="Закрыть меню"><CloseIcon /></button></div>
-          <Link href="/" onClick={close}>Главная</Link>
           <Link href="/archive" onClick={close}>Архив</Link>
-          <Link href="/stats" onClick={close}>Статистика</Link>
           <Link href="/upload" onClick={close}>Загрузить</Link>
           <a className="telegram-link" href="https://t.me/minbar_archive_bot" target="_blank" rel="noreferrer">Telegram <span aria-hidden="true">↗</span></a>
         </nav>
