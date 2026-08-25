@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const RAMADAN_START = new Date("2027-02-08T00:00:00+03:00").getTime();
@@ -42,7 +43,10 @@ export function RamadanCountdown() {
         <div><strong>{String(values.minutes).padStart(2, "0")}</strong><span>минут</span></div>
         <div><strong>{String(values.seconds).padStart(2, "0")}</strong><span>секунд</span></div>
       </div>
-      <p className="ramadan-note">Дата предварительная и зависит от наблюдения луны.</p>
+      <div className="ramadan-card-footer">
+        <p className="ramadan-note">Дата предварительная и зависит от наблюдения луны.</p>
+        <Link href="/ramadan">Открыть трекер <span aria-hidden="true">→</span></Link>
+      </div>
     </aside>
   );
 }

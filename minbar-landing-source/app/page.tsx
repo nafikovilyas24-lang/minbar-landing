@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PlayButton } from "@/components/audio-player";
+import { WeeklyReminder } from "@/components/weekly-reminder";
 import { loadKhutbas } from "@/lib/supabase-khutbas";
 
 export default async function Home() {
@@ -46,8 +47,16 @@ export default async function Home() {
         <div><p className="eyebrow">Пополнить архив</p><h2>Есть запись хутбы?</h2></div>
         <div className="contribute-copy">
           <p>Загрузите MP3 и основные данные. После проверки запись появится в архиве.</p>
-          <div className="contribute-actions"><Link className="button button-primary" href="/upload">Загрузить хутбу</Link><a className="text-link" href="https://t.me/hwee1r" target="_blank" rel="noreferrer">По сотрудничеству <span aria-hidden="true">↗</span></a></div>
+          <div className="contribute-actions"><Link className="button button-primary" href="/upload">Загрузить хутбу</Link></div>
         </div>
+      </section>
+
+      <section
+        className="section-shell"
+        aria-label="Цитата недели"
+        style={{ paddingBlock: "8px 76px" }}
+      >
+        <WeeklyReminder />
       </section>
     </main>
   );

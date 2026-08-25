@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { AudioPlayerProvider, GlobalPlayer } from "@/components/audio-player";
+import { MaintenanceScreen } from "@/components/maintenance-screen";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { loadMaintenanceState } from "@/lib/maintenance";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,16 +15,22 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const maintenance = await loadMaintenanceState();
+
   return (
     <html lang="ru">
       <body>
-        <AudioPlayerProvider>
-          <SiteHeader />
-          {children}
-          <SiteFooter />
-          <GlobalPlayer />
-        </AudioPlayerProvider>
+        {maintenance.enabled ? (
+          <MaintenanceScreen state={maintenance} />
+        ) : (
+          <AudioPlayerProvider>
+            <SiteHeader />
+            {children}
+            <SiteFooter />
+            <GlobalPlayer />
+          </AudioPlayerProvider>
+        )}
       </body>
     </html>
   );

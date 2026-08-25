@@ -38,10 +38,13 @@ npm run dev
 
 ```env
 SUPABASE_URL=your_supabase_url
-SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
 ```
 
-Также поддерживаются имена `NEXT_PUBLIC_SUPABASE_URL` и `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+Также поддерживаются имена `NEXT_PUBLIC_SUPABASE_URL` и
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Старые переменные
+`SUPABASE_ANON_KEY` и `NEXT_PUBLIC_SUPABASE_ANON_KEY` оставлены для
+совместимости.
 
 ## Проверка проекта
 
