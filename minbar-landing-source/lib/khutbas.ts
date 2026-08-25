@@ -16,21 +16,6 @@ export type Khutba = {
 
 export const khutbas: Khutba[] = [
   {
-    id: 1,
-    title: "Проверка аудиоплеера",
-    topic: "Демонстрация",
-    imam: "Демонстрационная запись",
-    mosque: "Minbar",
-    city: "Казань",
-    language: "Русский",
-    date: "21 августа 2026",
-    isoDate: "2026-08-21",
-    duration: "14 сек",
-    durationSeconds: 14,
-    summary: "Короткая тестовая запись, чтобы сразу проверить работу плеера.",
-    audioUrl: "/demo-player.mp3",
-  },
-  {
     id: 2,
     title: "Сила дуа",
     topic: "Дуа",
