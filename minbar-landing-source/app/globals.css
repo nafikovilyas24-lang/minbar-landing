@@ -112,17 +112,17 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .text-link span { margin-left: 8px; color: var(--accent); transition: margin 160ms ease; }
 .text-link:hover span { margin-left: 12px; }
 
-.hero { position: relative; isolation: isolate; min-height: 540px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(48px, 7vw, 92px); align-items: center; padding-block: 52px 58px; }
+.hero { position: relative; isolation: isolate; overflow: clip; min-height: 540px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(48px, 7vw, 92px); align-items: center; padding-block: 52px 58px; }
 .hero-copy, .hero .featured { position: relative; z-index: 2; }
 .hero-copy { padding-bottom: 18px; }
 .hero-copy h1 { margin: 21px 0 24px; font-size: clamp(3rem, 5.1vw, 4.85rem); line-height: 1; letter-spacing: -0.06em; font-weight: 610; }
 .hero-copy h1 em { color: var(--green); font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
 .hero-lead { max-width: 590px; margin: 0; color: var(--muted); font-size: 1.08rem; line-height: 1.75; }
 .hero-actions { display: flex; align-items: center; gap: 30px; margin-top: 38px; }
-.moon-visual { position: absolute; z-index: 1; top: 2%; left: 43%; width: clamp(230px, 30vw, 410px); height: auto; opacity: 0.3; pointer-events: none; transform-style: preserve-3d; filter: drop-shadow(0 22px 42px rgba(0, 0, 0, 0.3)); animation: moon-turn 14s ease-in-out infinite; }
-@keyframes moon-turn {
-  0%, 100% { transform: perspective(900px) rotateX(-7deg) rotateY(-14deg) rotateZ(-3deg) translateY(0); }
-  50% { transform: perspective(900px) rotateX(7deg) rotateY(14deg) rotateZ(4deg) translateY(-11px); }
+.moon-visual { position: absolute; z-index: 1; top: 5%; left: 38%; width: clamp(230px, 27vw, 380px); height: auto; opacity: 0.2; pointer-events: none; filter: drop-shadow(0 22px 42px rgba(0, 0, 0, 0.3)); animation: moon-float 14s ease-in-out infinite; }
+@keyframes moon-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-7deg); }
+  50% { transform: translate3d(0, -9px, 0) rotate(-5deg); }
 }
 
 .featured { align-self: center; border-top: 1px solid var(--accent); border-bottom: 1px solid var(--line); padding: 0 0 26px; }
@@ -505,7 +505,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 @media (max-width: 520px) {
   .hero-copy h1 { font-size: clamp(3.1rem, 15vw, 4.3rem); }
-  .moon-visual { top: 6%; left: auto; right: -22%; width: 88vw; opacity: 0.24; }
+  .moon-visual { top: 20%; left: auto; right: -31%; width: 78vw; opacity: 0.16; }
   .featured-meta { grid-template-columns: 1fr; gap: 16px; }
   .countdown { grid-template-columns: 1fr 1fr; }
   .countdown > div { min-height: 112px; }
