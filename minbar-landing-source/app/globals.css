@@ -119,11 +119,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .hero-copy h1 em { color: var(--green); font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
 .hero-lead { max-width: 590px; margin: 0; color: var(--muted); font-size: 1.08rem; line-height: 1.75; }
 .hero-actions { display: flex; align-items: center; gap: 30px; margin-top: 38px; }
-.moon-visual { position: absolute; z-index: 1; top: 5%; left: 38%; width: clamp(230px, 27vw, 380px); height: auto; opacity: 0.2; pointer-events: none; filter: drop-shadow(0 22px 42px rgba(0, 0, 0, 0.3)); animation: moon-float 14s ease-in-out infinite; }
-@keyframes moon-float {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(-7deg); }
-  50% { transform: translate3d(0, -9px, 0) rotate(-5deg); }
-}
+.moon-visual { position: absolute; z-index: 1; top: 7%; left: 15%; width: clamp(280px, 31vw, 430px); height: auto; opacity: 0.11; pointer-events: none; transform: rotate(-6deg); filter: drop-shadow(0 22px 42px rgba(0, 0, 0, 0.24)); }
 
 .featured { align-self: center; border-top: 1px solid var(--accent); border-bottom: 1px solid var(--line); padding: 0 0 26px; }
 .featured-topline { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--line); color: var(--subtle); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
@@ -505,7 +501,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 @media (max-width: 520px) {
   .hero-copy h1 { font-size: clamp(3.1rem, 15vw, 4.3rem); }
-  .moon-visual { top: 20%; left: auto; right: -31%; width: 78vw; opacity: 0.16; }
+  .moon-visual { top: 10%; left: auto; right: -18%; width: 72vw; opacity: 0.09; }
   .featured-meta { grid-template-columns: 1fr; gap: 16px; }
   .countdown { grid-template-columns: 1fr 1fr; }
   .countdown > div { min-height: 112px; }
