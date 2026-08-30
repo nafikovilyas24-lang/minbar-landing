@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <main>
       <section className="hero section-shell">
-        <img className="moon-visual" src="/moon-3d.png" alt="" aria-hidden="true" />
+        <img className="moon-visual" src="/moon-crescent.png" alt="" aria-hidden="true" />
         <div className="hero-copy">
           <p className="eyebrow">Аудиоархив пятничных хутб</p>
           <h1>Слушайте.<br />Размышляйте.<br /><em>Делитесь.</em></h1>
