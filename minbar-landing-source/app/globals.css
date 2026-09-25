@@ -355,6 +355,18 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .about-principles span { color: var(--accent); font-size: 0.7rem; }
 .about-principles h2 { margin: 65px 0 13px; font-size: 1.65rem; letter-spacing: -0.035em; font-weight: 550; }
 .about-principles p { max-width: 310px; margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.72; }
+.about-faq { display: grid; grid-template-columns: 0.78fr 1.22fr; gap: clamp(55px, 8vw, 110px); padding-block: 105px 92px; border-bottom: 1px solid var(--line); }
+.about-faq-heading { position: sticky; top: 112px; align-self: start; }
+.about-faq-heading h2 { margin: 15px 0 20px; font-size: clamp(2.75rem, 5vw, 4.9rem); line-height: 1.02; letter-spacing: -0.06em; font-weight: 550; }
+.about-faq-heading > p:last-child { max-width: 410px; margin: 0; color: var(--muted); line-height: 1.72; }
+.about-faq-list { border-top: 1px solid var(--line); }
+.about-faq-list details { border-bottom: 1px solid var(--line); }
+.about-faq-list summary { display: grid; grid-template-columns: 42px 1fr 24px; gap: 12px; align-items: center; padding: 26px 0; cursor: pointer; list-style: none; font-size: 1.12rem; line-height: 1.4; letter-spacing: -0.02em; font-weight: 540; }
+.about-faq-list summary::-webkit-details-marker { display: none; }
+.about-faq-list summary > span { color: var(--accent); font-size: 0.68rem; letter-spacing: 0; }
+.about-faq-list summary::after { content: "+"; color: var(--subtle); font-size: 1.45rem; line-height: 1; text-align: right; font-weight: 350; }
+.about-faq-list details[open] summary::after { content: "−"; }
+.about-faq-list details > p { max-width: 650px; margin: -5px 36px 27px 54px; color: var(--muted); font-size: 0.93rem; line-height: 1.75; }
 .about-cta { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; padding-block: 88px 100px; }
 .about-cta h2 { margin: 15px 0 0; font-size: clamp(2.7rem, 4.7vw, 4.4rem); line-height: 1.05; letter-spacing: -0.055em; font-weight: 550; }
 .about-cta > div:last-child { align-self: end; }
@@ -490,6 +502,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .about-principles article { min-height: 240px; padding: 32px 0 38px; }
   .about-principles article + article { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
   .about-principles h2 { margin-top: 43px; }
+  .about-faq { grid-template-columns: 1fr; gap: 42px; padding-block: 78px 72px; }
+  .about-faq-heading { position: static; }
+  .about-faq-list summary { grid-template-columns: 34px 1fr 22px; padding-block: 23px; font-size: 1rem; }
+  .about-faq-list details > p { margin: -2px 20px 24px 46px; }
   .about-cta { gap: 35px; padding-block: 80px 95px; }
   .global-player { height: 72px; }
   .global-player-inner { width: calc(100% - 24px); grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }

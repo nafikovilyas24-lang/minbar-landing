@@ -6,6 +6,33 @@ export const metadata: Metadata = {
   description: "Что такое Minbar, почему архив удобен и как им пользоваться.",
 };
 
+const frequentlyAskedQuestions = [
+  {
+    question: "Что можно найти в архиве Minbar?",
+    answer: "Аудиозаписи пятничных хутб с датой, языком, городом, мечетью и именем хазрата. Эти сведения помогают быстро найти нужную запись.",
+  },
+  {
+    question: "Как найти нужную хутбу?",
+    answer: "Откройте архив, введите название в строке поиска или используйте фильтры по языку, городу, мечети и хазрату.",
+  },
+  {
+    question: "Как добавить свою запись?",
+    answer: "Перейдите на страницу загрузки, выберите аудиофайл и заполните сведения о хутбе. Загрузить запись также можно через Telegram-бот Minbar.",
+  },
+  {
+    question: "Можно ли пользоваться Minbar с телефона?",
+    answer: "Да. Сайт и встроенный аудиоплеер работают на телефонах, планшетах и компьютерах.",
+  },
+  {
+    question: "На каких языках доступны записи?",
+    answer: "В архиве могут быть хутбы на разных языках. Доступные варианты отображаются в фильтре и зависят от уже добавленных записей.",
+  },
+  {
+    question: "Что делать, если не получается найти или загрузить запись?",
+    answer: "Напишите через кнопку «Вопрос админу» в Telegram-боте. Если вопрос касается работы Minbar, помощник подскажет сразу; остальные обращения получит администратор.",
+  },
+];
+
 export default function AboutPage() {
   return (
     <main className="page-main">
@@ -66,6 +93,25 @@ export default function AboutPage() {
           <h2>Добавьте запись</h2>
           <p>Если у вас есть MP3 хутбы, заполните основные сведения и отправьте запись в архив.</p>
         </article>
+      </section>
+
+      <section className="about-faq section-shell" aria-labelledby="faq-title">
+        <div className="about-faq-heading">
+          <p className="eyebrow">Коротко о главном</p>
+          <h2 id="faq-title">Частые вопросы</h2>
+          <p>Ответы на вопросы, которые чаще всего возникают перед первым использованием Minbar.</p>
+        </div>
+        <div className="about-faq-list">
+          {frequentlyAskedQuestions.map((item, index) => (
+            <details key={item.question} open={index === 0}>
+              <summary>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                {item.question}
+              </summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
       </section>
 
       <section id="telegram" className="about-cta section-shell">
