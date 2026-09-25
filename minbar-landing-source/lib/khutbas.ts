@@ -1,7 +1,6 @@
 export type Khutba = {
   id: number;
   title: string;
-  topic: string;
   imam: string;
   mosque: string;
   city: string;
@@ -18,7 +17,6 @@ export const khutbas: Khutba[] = [
   {
     id: 2,
     title: "Сила дуа",
-    topic: "Дуа",
     imam: "Марат хазрат",
     mosque: "Нур",
     city: "Уфа",
@@ -32,7 +30,6 @@ export const khutbas: Khutba[] = [
   {
     id: 3,
     title: "Терпение мусульманина",
-    topic: "Покаяние",
     imam: "Рамиль хазрат",
     mosque: "Ихлас",
     city: "Москва",
@@ -46,7 +43,6 @@ export const khutbas: Khutba[] = [
   {
     id: 4,
     title: "Любовь к Корану",
-    topic: "Коран",
     imam: "Айрат хазрат",
     mosque: "Азимовская мечеть",
     city: "Казань",
@@ -60,7 +56,6 @@ export const khutbas: Khutba[] = [
   {
     id: 5,
     title: "Семья как аманат",
-    topic: "Семья",
     imam: "Ильдар хазрат",
     mosque: "Ярдэм",
     city: "Казань",
@@ -74,7 +69,6 @@ export const khutbas: Khutba[] = [
   {
     id: 6,
     title: "Ценность пятничного намаза",
-    topic: "Намаз",
     imam: "Мунир хазрат",
     mosque: "Ляля-Тюльпан",
     city: "Уфа",

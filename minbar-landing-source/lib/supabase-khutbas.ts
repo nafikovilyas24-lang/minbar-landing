@@ -4,7 +4,6 @@ import { getKhutba, khutbas as fallbackKhutbas } from "@/lib/khutbas";
 type SupabaseKhutba = {
   id: number;
   title: string;
-  topic: string | null;
   imam: string | null;
   mosque: string;
   city: string;
@@ -33,7 +32,6 @@ function mapKhutba(record: SupabaseKhutba): Khutba {
   return {
     id: record.id,
     title: record.title,
-    topic: record.topic?.trim() || "",
     imam: record.imam ?? "Хазрат не указан",
     mosque: record.mosque,
     city: record.city,
