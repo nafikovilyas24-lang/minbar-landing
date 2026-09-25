@@ -4,7 +4,7 @@ import { getKhutba, khutbas as fallbackKhutbas } from "@/lib/khutbas";
 type SupabaseKhutba = {
   id: number;
   title: string;
-  topic: string;
+  topic: string | null;
   imam: string | null;
   mosque: string;
   city: string;
@@ -33,7 +33,7 @@ function mapKhutba(record: SupabaseKhutba): Khutba {
   return {
     id: record.id,
     title: record.title,
-    topic: record.topic,
+    topic: record.topic?.trim() || "",
     imam: record.imam ?? "Хазрат не указан",
     mosque: record.mosque,
     city: record.city,
@@ -42,7 +42,7 @@ function mapKhutba(record: SupabaseKhutba): Khutba {
     isoDate: record.date,
     duration: record.duration ?? "Длительность не указана",
     durationSeconds: Number.isFinite(durationMinutes) && durationMinutes > 0 ? durationMinutes * 60 : 1800,
-    summary: `Хутба на тему «${record.topic}», прочитанная в мечети ${record.mosque}.`,
+    summary: `Пятничная хутба, прочитанная в мечети ${record.mosque}.`,
     audioUrl: record.audio_url,
   };
 }

@@ -28,7 +28,7 @@ export default async function KhutbaPage({ params }: PageProps) {
       <article className="detail section-shell">
         <Link className="back-link" href="/archive">← Вернуться в архив</Link>
         <div className="detail-header">
-          <div><div className="detail-tags"><span>{khutba.language}</span><span>{khutba.topic}</span></div><h1>{khutba.title}</h1><p>{khutba.summary}</p></div>
+          <div><div className="detail-tags"><span>{khutba.language}</span></div><h1>{khutba.title}</h1><p>{khutba.summary}</p></div>
           <PlayButton track={khutba} label="Слушать хутбу" large />
         </div>
         <div className="detail-player">
@@ -36,7 +36,7 @@ export default async function KhutbaPage({ params }: PageProps) {
           <div className="detail-player-labels"><span>0:00</span><span>{khutba.duration}</span></div>
         </div>
         <div className="detail-content">
-          <section><p className="eyebrow">О хутбе</p><h2>{khutba.topic}</h2><p>{khutba.summary} Эта запись опубликована в Minbar, чтобы к ней можно было вернуться в удобное время и поделиться с близкими.</p></section>
+          <section><p className="eyebrow">О хутбе</p><h2>Запись из мечети {khutba.mosque}</h2><p>{khutba.summary} Эта запись опубликована в Minbar, чтобы к ней можно было вернуться в удобное время и поделиться с близкими.</p></section>
           <dl>
             <div><dt>Хазрат</dt><dd>{khutba.imam}</dd></div><div><dt>Мечеть</dt><dd>{khutba.mosque}</dd></div><div><dt>Город</dt><dd>{khutba.city}</dd></div><div><dt>Дата</dt><dd>{khutba.date}</dd></div><div><dt>Язык</dt><dd>{khutba.language}</dd></div><div><dt>Длительность</dt><dd>{khutba.duration}</dd></div>
           </dl>

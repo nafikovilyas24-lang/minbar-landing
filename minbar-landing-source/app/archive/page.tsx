@@ -4,7 +4,7 @@ import { loadKhutbas } from "@/lib/supabase-khutbas";
 
 export const metadata: Metadata = {
   title: "Архив хутб",
-  description: "Поиск хутб по языку, городу, мечети, хазрату и теме.",
+  description: "Поиск хутб по языку, городу, мечети и хазрату.",
 };
 
 export default async function ArchivePage() {
@@ -13,7 +13,7 @@ export default async function ArchivePage() {
     <main className="page-main">
       <section className="page-intro section-shell archive-intro">
         <div><p className="eyebrow">Медиаархив</p><h1>Архив хутб</h1></div>
-        <p>Ищите запись по теме, языку, городу, мечети или имени хазрата.</p>
+        <p>Ищите запись по названию, языку, городу, мечети или имени хазрата.</p>
       </section>
       <ArchiveExplorer items={items} />
     </main>
