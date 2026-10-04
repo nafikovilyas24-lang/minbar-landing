@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { PlayButton } from "@/components/audio-player";
 import { WeeklyReminder } from "@/components/weekly-reminder";
 import { loadKhutbas } from "@/lib/supabase-khutbas";
@@ -10,7 +11,15 @@ export default async function Home() {
   return (
     <main>
       <section className="hero section-shell">
-        <img className="moon-visual" src="/moon-crescent.png" alt="" aria-hidden="true" />
+        <Image
+          className="moon-visual"
+          src="/moon-crescent.png"
+          alt=""
+          width={1024}
+          height={1024}
+          priority
+          aria-hidden="true"
+        />
         <div className="hero-copy">
           <p className="eyebrow">Аудиоархив пятничных хутб</p>
           <h1>Слушайте.<br />Размышляйте.<br /><em>Делитесь.</em></h1>

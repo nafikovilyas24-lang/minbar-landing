@@ -7,7 +7,7 @@ import { loadMaintenanceState } from "@/lib/maintenance";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://minbar-khutbah-archive.hondon-bads1.chatgpt.site"),
+  metadataBase: new URL("https://minbararhive.ru"),
   title: { default: "Minbar — Архив хутб", template: "%s — Minbar" },
   description: "Современный архив исламских хутб: слушайте записи по языку, городу, мечети, хазрату и теме.",
   openGraph: { title: "Minbar — Архив хутб", description: "Слушайте. Размышляйте. Делитесь.", type: "website", images: [{ url: "/og.png", width: 1731, height: 909, alt: "Minbar — Архив хутб" }] },
