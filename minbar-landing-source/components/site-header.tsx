@@ -29,7 +29,7 @@ export function SiteHeader() {
           <Link href="/archive" onClick={close}>Архив</Link>
           <Link href="/about" onClick={close}>О проекте</Link>
           <Link href="/upload" onClick={close}>Загрузить</Link>
-          <a className="telegram-link" href="https://t.me/minbar_archive_bot" target="_blank" rel="noreferrer">Telegram <span aria-hidden="true">↗</span></a>
+          <a className="telegram-link" href="https://t.me/minbar_archive_bot" target="_blank" rel="noreferrer" onClick={close}>Telegram <span aria-hidden="true">↗</span></a>
         </nav>
         <button className="menu-button" onClick={() => setOpen(true)} aria-label="Открыть меню"><span /><span /></button>
       </div>
