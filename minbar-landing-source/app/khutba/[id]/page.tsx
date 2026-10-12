@@ -29,7 +29,17 @@ export default async function KhutbaPage({ params }: PageProps) {
         <Link className="back-link" href="/archive">← Вернуться в архив</Link>
         <div className="detail-header">
           <div><div className="detail-tags"><span>{khutba.language}</span></div><h1>{khutba.title}</h1><p>{khutba.summary}</p></div>
-          <PlayButton track={khutba} label="Слушать хутбу" large />
+          <div className="detail-actions">
+            <PlayButton track={khutba} label="Слушать хутбу" large />
+            <a
+              className="button button-secondary telegram-deep-link"
+              href={`https://t.me/minbar_archive_bot?start=khutba_${khutba.id}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Слушать в Telegram ↗
+            </a>
+          </div>
         </div>
         <div className="detail-player">
           <div className="waveform" aria-hidden="true">{Array.from({ length: 72 }, (_, index) => <i key={index} style={{ height: `${22 + ((index * 17) % 53)}%` }} />)}</div>
@@ -41,6 +51,27 @@ export default async function KhutbaPage({ params }: PageProps) {
             <div><dt>Хазрат</dt><dd>{khutba.imam}</dd></div><div><dt>Мечеть</dt><dd>{khutba.mosque}</dd></div><div><dt>Город</dt><dd>{khutba.city}</dd></div><div><dt>Дата</dt><dd>{khutba.date}</dd></div><div><dt>Язык</dt><dd>{khutba.language}</dd></div><div><dt>Длительность</dt><dd>{khutba.duration}</dd></div>
           </dl>
         </div>
+        <section className="transcript-section" aria-labelledby="transcript-title">
+          <div className="transcript-heading">
+            <div>
+              <p className="eyebrow">Текст хутбы</p>
+              <h2 id="transcript-title">Расшифровка аудиозаписи</h2>
+            </div>
+            {khutba.transcript && <span>Доступен поиск по тексту</span>}
+          </div>
+          {khutba.transcript ? (
+            <>
+              <p className="transcript-notice">Текст создан автоматически. В именах и цитатах возможны неточности — сверяйтесь с аудиозаписью.</p>
+              <div className="transcript-text">{khutba.transcript.split(/\n{2,}/).map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div>
+            </>
+          ) : (
+            <p className="transcript-empty">
+              {khutba.transcriptionStatus === "processing"
+                ? "Расшифровка создаётся. Она появится здесь автоматически."
+                : "Для этой записи расшифровка пока не готова. Аудио можно слушать без ограничений."}
+            </p>
+          )}
+        </section>
       </article>
     </main>
   );

@@ -26,7 +26,7 @@ export function ArchiveExplorer({ items }: { items: Khutba[] }) {
   const filtered = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("ru");
     return items.filter((item) => {
-      const haystack = [item.title, item.imam, item.mosque, item.city].join(" ").toLocaleLowerCase("ru");
+      const haystack = [item.title, item.imam, item.mosque, item.city, item.summary, item.transcript].filter(Boolean).join(" ").toLocaleLowerCase("ru");
       return (!normalized || haystack.includes(normalized))
         && (language === "Все языки" || item.language === language)
         && (city === "Все города" || item.city === city)
@@ -42,7 +42,7 @@ export function ArchiveExplorer({ items }: { items: Khutba[] }) {
   return (
     <section className="archive-body section-shell">
       <div className="filter-bar">
-        <label className="search-field"><SearchIcon /><span className="sr-only">Поиск по архиву</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Название, мечеть или хазрат" /></label>
+        <label className="search-field"><SearchIcon /><span className="sr-only">Поиск по архиву и текстам хутб</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Название, мечеть, хазрат или слова из хутбы" /></label>
         <select value={language} onChange={(event) => setLanguage(event.target.value)} aria-label="Язык"><option>Все языки</option>{languages.map((value) => <option key={value}>{value}</option>)}</select>
         <select value={city} onChange={(event) => setCity(event.target.value)} aria-label="Город"><option>Все города</option>{cities.map((value) => <option key={value}>{value}</option>)}</select>
         <select value={mosque} onChange={(event) => setMosque(event.target.value)} aria-label="Мечеть"><option>Все мечети</option>{mosques.map((value) => <option key={value}>{value}</option>)}</select>

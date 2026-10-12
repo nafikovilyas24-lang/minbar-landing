@@ -11,6 +11,8 @@ export type Khutba = {
   durationSeconds: number;
   summary: string;
   audioUrl?: string;
+  transcript?: string;
+  transcriptionStatus?: "pending" | "processing" | "ready" | "failed";
 };
 
 export const khutbas: Khutba[] = [

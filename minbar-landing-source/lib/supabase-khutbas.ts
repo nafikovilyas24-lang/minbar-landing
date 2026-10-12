@@ -11,6 +11,9 @@ type SupabaseKhutba = {
   date: string;
   duration: string | null;
   audio_url: string;
+  transcript: string | null;
+  ai_summary: string | null;
+  transcription_status: "pending" | "processing" | "ready" | "failed" | null;
 };
 
 function getConfig() {
@@ -40,8 +43,10 @@ function mapKhutba(record: SupabaseKhutba): Khutba {
     isoDate: record.date,
     duration: record.duration ?? "Длительность не указана",
     durationSeconds: Number.isFinite(durationMinutes) && durationMinutes > 0 ? durationMinutes * 60 : 1800,
-    summary: `Пятничная хутба, прочитанная в мечети ${record.mosque}.`,
+    summary: record.ai_summary?.trim() || `Пятничная хутба, прочитанная в мечети ${record.mosque}.`,
     audioUrl: record.audio_url,
+    transcript: record.transcript?.trim() || undefined,
+    transcriptionStatus: record.transcription_status ?? undefined,
   };
 }
 
