@@ -57,7 +57,8 @@ npm run build
 ## Telegram
 
 - Бот: [@minbar_archive_bot](https://t.me/minbar_archive_bot)
-- По сотрудничеству: [@hwee1r](https://t.me/hwee1r)
+- Поддержка: [@supporminbar](https://t.me/supporminbar)
+- По сотрудничеству: [@nafikovi](https://t.me/nafikovi)
 
 ## Лицензия
 

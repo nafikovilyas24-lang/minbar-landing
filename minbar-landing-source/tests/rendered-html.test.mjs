@@ -29,6 +29,8 @@ test("renders the production home page and metadata", async () => {
   const html = await response.text();
   assert.match(html, /<title>Minbar — Архив хутб<\/title>/i);
   assert.match(html, /Аудиоархив пятничных хутб/i);
+  assert.match(html, /https:\/\/t\.me\/supporminbar/i);
+  assert.match(html, /https:\/\/t\.me\/nafikovi/i);
   assert.match(
     html,
     /<meta(?=[^>]*\bproperty=["']og:image["'])(?=[^>]*\bcontent=["']https:\/\/minbararhive\.ru\/og\.png["'])[^>]*>/i,
