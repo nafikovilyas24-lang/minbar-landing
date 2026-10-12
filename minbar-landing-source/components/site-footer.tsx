@@ -8,8 +8,8 @@ export function SiteFooter() {
         <div><Brand /><p>Хутбы из разных мечетей в одном аккуратном и понятном архиве.</p></div>
         <nav aria-label="Навигация в подвале"><Link href="/archive">Архив</Link><Link href="/about">О проекте</Link><Link href="/upload">Добавить запись</Link><a href="https://t.me/minbar_archive_bot" target="_blank" rel="noreferrer">Telegram-бот</a></nav>
         <div className="footer-contact">
-          <a className="footer-telegram" href="https://t.me/supporminbar" target="_blank" rel="noreferrer">Поддержка · @supporminbar <b aria-hidden="true">↗</b></a>
-          <a className="footer-telegram" href="https://t.me/nafikovi" target="_blank" rel="noreferrer">Сотрудничество · @nafikovi <b aria-hidden="true">↗</b></a>
+          <a className="footer-telegram" href="https://t.me/supporminbar" target="_blank" rel="noreferrer">Поддержка <b aria-hidden="true">↗</b></a>
+          <a className="footer-telegram" href="https://t.me/hwee1rr" target="_blank" rel="noreferrer">Сотрудничество <b aria-hidden="true">↗</b></a>
           <small>Казань · 2026</small>
         </div>
       </div>

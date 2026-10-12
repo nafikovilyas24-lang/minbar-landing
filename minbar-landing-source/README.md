@@ -58,7 +58,7 @@ npm run build
 
 - Бот: [@minbar_archive_bot](https://t.me/minbar_archive_bot)
 - Поддержка: [@supporminbar](https://t.me/supporminbar)
-- По сотрудничеству: [@nafikovi](https://t.me/nafikovi)
+- По сотрудничеству: [@hwee1rr](https://t.me/hwee1rr)
 
 ## Лицензия
 
