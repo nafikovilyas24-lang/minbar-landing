@@ -9,7 +9,7 @@ type PlayerState = {
   current: Khutba | null;
   playing: boolean;
   progress: number;
-  toggle: (track: Khutba) => void;
+  toggle: (track: Khutba, startAtSeconds?: number) => void;
   seek: (value: number) => void;
 };
 
@@ -20,6 +20,7 @@ export function AudioPlayerProvider({ children }: { children: React.ReactNode })
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const requestedStartRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!playing || !current) return;
@@ -33,6 +34,13 @@ export function AudioPlayerProvider({ children }: { children: React.ReactNode })
     }
 
     const audio = audioRef.current;
+    const applyRequestedStart = () => {
+      if (requestedStartRef.current === null || !Number.isFinite(audio.duration)) return;
+      audio.currentTime = Math.min(requestedStartRef.current, Math.max(0, audio.duration - 1));
+      requestedStartRef.current = null;
+    };
+    if (audio.readyState >= 1) applyRequestedStart();
+    else audio.addEventListener("loadedmetadata", applyRequestedStart, { once: true });
     const onTime = () => {
       if (audio.duration) setProgress((audio.currentTime / audio.duration) * 100);
     };
@@ -51,6 +59,7 @@ export function AudioPlayerProvider({ children }: { children: React.ReactNode })
       audio.removeEventListener("timeupdate", onTime);
       audio.removeEventListener("ended", onEnded);
       audio.removeEventListener("error", onError);
+      audio.removeEventListener("loadedmetadata", applyRequestedStart);
     };
   }, [playing, current]);
 
@@ -62,9 +71,20 @@ export function AudioPlayerProvider({ children }: { children: React.ReactNode })
     current,
     playing,
     progress,
-    toggle: (track) => {
+    toggle: (track, startAtSeconds) => {
+      if (typeof startAtSeconds === "number" && startAtSeconds >= 0) {
+        requestedStartRef.current = startAtSeconds;
+      }
       if (current?.id === track.id) {
-        setPlaying((value) => !value);
+        if (typeof startAtSeconds === "number") {
+          if (audioRef.current?.duration) {
+            audioRef.current.currentTime = Math.min(startAtSeconds, Math.max(0, audioRef.current.duration - 1));
+            requestedStartRef.current = null;
+          }
+          setPlaying(true);
+        } else {
+          setPlaying((value) => !value);
+        }
         return;
       }
       audioRef.current?.pause();

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useAudioPlayer } from "@/components/audio-player";
 
 type ShareKhutbaCardProps = {
   id: number;
@@ -132,9 +133,11 @@ function makeCard(
 }
 
 export function ShareKhutbaCard({ id, title, summary, imam, mosque, city }: ShareKhutbaCardProps) {
+  const { current, progress } = useAudioPlayer();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [notice, setNotice] = useState("");
+  const [includeMoment, setIncludeMoment] = useState(true);
 
   const renderCard = useCallback(async () => {
     if (!canvasRef.current) return;
@@ -156,12 +159,20 @@ export function ShareKhutbaCard({ id, title, summary, imam, mosque, city }: Shar
   }, [isOpen]);
 
   const getBlob = () => new Promise<Blob | null>((resolve) => canvasRef.current?.toBlob(resolve, "image/png"));
-  const pageUrl = typeof window === "undefined" ? `https://minbararhive.ru/khutba/${id}` : window.location.href;
+  const momentSecond = current?.id === id && progress > 0
+    ? Math.floor((progress / 100) * current.durationSeconds)
+    : 0;
+  const getPageUrl = () => {
+    const url = new URL(`/khutba/${id}`, "https://minbararhive.ru");
+    if (includeMoment && momentSecond > 0) url.searchParams.set("t", String(momentSecond));
+    return url.href;
+  };
 
   const shareCard = async () => {
     const blob = await getBlob();
     if (!blob) return;
     const file = new File([blob], `minbar-hutba-${id}.png`, { type: "image/png" });
+    const pageUrl = getPageUrl();
 
     try {
       if (navigator.canShare?.({ files: [file] })) {
@@ -198,10 +209,30 @@ export function ShareKhutbaCard({ id, title, summary, imam, mosque, city }: Shar
 
   const copyLink = async () => {
     try {
-      await navigator.clipboard.writeText(pageUrl);
+      await navigator.clipboard.writeText(getPageUrl());
       setNotice("Ссылка на хутбу скопирована.");
     } catch {
       setNotice("Не удалось скопировать ссылку.");
+    }
+  };
+
+  const copyTelegramPost = async () => {
+    const location = [mosque, city].filter(Boolean).join(", ");
+    const post = [
+      `🕌 ${title}`,
+      "",
+      summary,
+      "",
+      `🎙 ${imam}`,
+      `📍 ${location}`,
+      "",
+      `Слушать в Minbar: ${getPageUrl()}`,
+    ].join("\n");
+    try {
+      await navigator.clipboard.writeText(post);
+      setNotice("Готовая публикация для Telegram скопирована.");
+    } catch {
+      setNotice("Не удалось скопировать публикацию.");
     }
   };
 
@@ -223,9 +254,16 @@ export function ShareKhutbaCard({ id, title, summary, imam, mosque, city }: Shar
               <button className="share-card-close" type="button" aria-label="Закрыть" onClick={() => setIsOpen(false)}>×</button>
             </div>
             <canvas ref={canvasRef} className="share-card-canvas" aria-label={`Карточка хутбы «${title}»`} />
+            {momentSecond > 0 && (
+              <label className="share-moment-option">
+                <input type="checkbox" checked={includeMoment} onChange={(event) => setIncludeMoment(event.target.checked)} />
+                <span>Открывать запись с момента {Math.floor(momentSecond / 60)}:{String(momentSecond % 60).padStart(2, "0")}</span>
+              </label>
+            )}
             <div className="share-card-actions">
               <button className="button button-primary" type="button" onClick={() => void shareCard()}>Отправить</button>
               <button className="button button-secondary" type="button" onClick={() => downloadCard()}>Скачать PNG</button>
+              <button className="button button-secondary" type="button" onClick={() => void copyTelegramPost()}>Текст для Telegram</button>
               <button className="button button-secondary" type="button" onClick={() => void copyLink()}>Скопировать ссылку</button>
             </div>
             {notice && <p className="share-card-notice" role="status">{notice}</p>}

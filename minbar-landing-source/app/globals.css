@@ -307,6 +307,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .share-card-canvas { width: min(430px, 100%); height: auto; display: block; margin-inline: auto; border: 1px solid var(--line); border-radius: 10px; background: #101110; box-shadow: 0 14px 50px rgba(0, 0, 0, 0.32); }
 .share-card-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 .share-card-notice { margin: 15px 0 0; color: var(--green); font-size: 0.8rem; text-align: center; }
+.share-moment-option { width: min(430px, 100%); display: flex; align-items: center; gap: 10px; margin: 15px auto 0; color: var(--muted); font-size: 0.8rem; }
+.share-moment-option input { accent-color: var(--green); }
+.poster-dialog { width: min(740px, 100%); }
+.poster-canvas { width: min(430px, 100%); height: auto; display: block; margin-inline: auto; border: 1px solid var(--line); border-radius: 8px; background: #111310; }
+.shared-moment { display: flex; align-items: center; justify-content: space-between; gap: 25px; margin-top: 16px; padding: 16px 18px; border: 1px solid color-mix(in srgb, var(--green) 35%, var(--line)); border-radius: 9px; background: color-mix(in srgb, var(--green) 5%, var(--panel)); }
+.shared-moment > div { display: flex; flex-direction: column; }
+.shared-moment span { color: var(--subtle); font-size: 0.72rem; }
+.shared-moment strong { color: var(--green); font-size: 1.25rem; font-variant-numeric: tabular-nums; }
 .detail-tags { display: flex; gap: 22px; }
 .detail-tags span + span { color: var(--subtle); }
 .detail-player { margin-top: 54px; padding: 29px 32px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.14); }
@@ -321,6 +329,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .detail-content dl div { display: grid; grid-template-columns: 115px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .detail-content dt { color: var(--subtle); font-size: 0.77rem; }
 .detail-content dd { margin: 0; color: #c6c6c1; font-size: 0.87rem; }
+.detail-content dd a { border-bottom: 1px solid var(--line-light); }
+.detail-content dd a:hover { color: var(--green); border-color: var(--green); }
+.directory-intro-side { max-width: 480px; }
+.directory-intro-side > a { display: inline-block; margin-bottom: 12px; color: var(--green); border-bottom: 1px solid color-mix(in srgb, var(--green) 45%, transparent); font-size: 0.83rem; }
+.directory-intro-side > p { margin: 0 0 22px; color: var(--muted); line-height: 1.7; }
+.directory-links { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 45px; }
+.directory-links a { display: inline-flex; align-items: center; gap: 14px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 0.8rem; }
+.directory-links a:hover { border-color: var(--line-light); color: var(--ink); }
+.directory-links span { color: var(--green); }
 .transcript-section { margin-top: 84px; padding-top: 54px; border-top: 1px solid var(--line); }
 .transcript-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
 .transcript-heading h2 { margin: 12px 0 0; font-size: clamp(2.2rem, 4vw, 3.8rem); line-height: 1.06; letter-spacing: -0.05em; font-weight: 550; }
@@ -511,6 +528,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .detail-header .play-button { width: 100%; }
   .detail-actions { width: 100%; }
   .detail-player { margin-top: 48px; padding: 22px 18px 16px; }
+  .shared-moment { align-items: stretch; flex-direction: column; }
+  .shared-moment .button { width: 100%; }
   .waveform { height: 86px; gap: 3px; }
   .detail-content { gap: 55px; margin-top: 65px; }
   .transcript-section { margin-top: 64px; padding-top: 42px; }

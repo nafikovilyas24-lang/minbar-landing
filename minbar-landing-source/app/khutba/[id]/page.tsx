@@ -3,10 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PlayButton } from "@/components/audio-player";
 import { ShareKhutbaCard } from "@/components/share-khutba-card";
+import { SharedMoment } from "@/components/shared-moment";
 import { khutbas } from "@/lib/khutbas";
 import { loadKhutba } from "@/lib/supabase-khutbas";
+import { entitySlug } from "@/lib/slugs";
 
-type PageProps = { params: Promise<{ id: string }> };
+type PageProps = { params: Promise<{ id: string }>; searchParams?: Promise<{ t?: string | string[] }> };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
@@ -20,10 +22,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function KhutbaPage({ params }: PageProps) {
+export default async function KhutbaPage({ params, searchParams }: PageProps) {
   const { id } = await params;
   const khutba = await loadKhutba(Number(id));
   if (!khutba) notFound();
+  const rawSecond = (await searchParams)?.t;
+  const parsedSecond = Number.parseInt(Array.isArray(rawSecond) ? rawSecond[0] : rawSecond ?? "", 10);
+  const sharedSecond = Number.isFinite(parsedSecond) && parsedSecond > 0
+    ? Math.min(parsedSecond, Math.max(0, khutba.durationSeconds - 1))
+    : 0;
   return (
     <main className="page-main">
       <article className="detail section-shell">
@@ -54,10 +61,11 @@ export default async function KhutbaPage({ params }: PageProps) {
           <div className="waveform" aria-hidden="true">{Array.from({ length: 72 }, (_, index) => <i key={index} style={{ height: `${22 + ((index * 17) % 53)}%` }} />)}</div>
           <div className="detail-player-labels"><span>0:00</span><span>{khutba.duration}</span></div>
         </div>
+        {sharedSecond > 0 && <SharedMoment track={khutba} second={sharedSecond} />}
         <div className="detail-content">
           <section><p className="eyebrow">О хутбе</p><h2>Запись из мечети {khutba.mosque}</h2><p>{khutba.summary} Эта запись опубликована в Minbar, чтобы к ней можно было вернуться в удобное время и поделиться с близкими.</p></section>
           <dl>
-            <div><dt>Хазрат</dt><dd>{khutba.imam}</dd></div><div><dt>Мечеть</dt><dd>{khutba.mosque}</dd></div><div><dt>Город</dt><dd>{khutba.city}</dd></div><div><dt>Дата</dt><dd>{khutba.date}</dd></div><div><dt>Язык</dt><dd>{khutba.language}</dd></div><div><dt>Длительность</dt><dd>{khutba.duration}</dd></div>
+            <div><dt>Хазрат</dt><dd>{khutba.imam}</dd></div><div><dt>Мечеть</dt><dd><Link href={`/mosque/${entitySlug(khutba.mosque)}`}>{khutba.mosque} ↗</Link></dd></div><div><dt>Город</dt><dd><Link href={`/city/${entitySlug(khutba.city)}`}>{khutba.city} ↗</Link></dd></div><div><dt>Дата</dt><dd>{khutba.date}</dd></div><div><dt>Язык</dt><dd>{khutba.language}</dd></div><div><dt>Длительность</dt><dd>{khutba.duration}</dd></div>
           </dl>
         </div>
         <section className="transcript-section" aria-labelledby="transcript-title">
