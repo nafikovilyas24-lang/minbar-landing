@@ -298,6 +298,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .detail-actions { min-width: 210px; display: flex; flex-direction: column; gap: 12px; }
 .detail-actions .play-button, .detail-actions .button { width: 100%; }
 .telegram-deep-link { white-space: nowrap; }
+.share-card-backdrop { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(0, 0, 0, 0.78); backdrop-filter: blur(9px); }
+.share-card-dialog { width: min(920px, 100%); max-height: calc(100svh - 48px); overflow: auto; padding: 30px; border: 1px solid var(--line-light); border-radius: 16px; background: #181918; box-shadow: 0 28px 100px rgba(0, 0, 0, 0.5); }
+.share-card-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 30px; margin-bottom: 24px; }
+.share-card-heading h2 { margin: 8px 0 0; font-size: clamp(1.7rem, 3vw, 2.45rem); line-height: 1.05; letter-spacing: -0.045em; font-weight: 570; }
+.share-card-close { width: 42px; height: 42px; flex: 0 0 auto; border: 1px solid var(--line-light); border-radius: 50%; background: transparent; color: var(--ink); font-size: 1.55rem; line-height: 1; }
+.share-card-close:hover { background: var(--panel-2); }
+.share-card-canvas { width: min(430px, 100%); height: auto; display: block; margin-inline: auto; border: 1px solid var(--line); border-radius: 10px; background: #101110; box-shadow: 0 14px 50px rgba(0, 0, 0, 0.32); }
+.share-card-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.share-card-notice { margin: 15px 0 0; color: var(--green); font-size: 0.8rem; text-align: center; }
 .detail-tags { display: flex; gap: 22px; }
 .detail-tags span + span { color: var(--subtle); }
 .detail-player { margin-top: 54px; padding: 29px 32px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.14); }
@@ -505,6 +514,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .waveform { height: 86px; gap: 3px; }
   .detail-content { gap: 55px; margin-top: 65px; }
   .transcript-section { margin-top: 64px; padding-top: 42px; }
+  .share-card-backdrop { padding: 12px; }
+  .share-card-dialog { max-height: calc(100svh - 24px); padding: 21px 16px; border-radius: 12px; }
+  .share-card-heading { margin-bottom: 18px; }
+  .share-card-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .share-card-actions .button:first-child { grid-column: 1 / -1; }
   .transcript-heading { align-items: flex-start; flex-direction: column; gap: 16px; }
   .upload-layout { gap: 42px; padding-block: 52px 72px; }
   .upload-aside { position: static; }

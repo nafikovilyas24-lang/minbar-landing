@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PlayButton } from "@/components/audio-player";
+import { ShareKhutbaCard } from "@/components/share-khutba-card";
 import { khutbas } from "@/lib/khutbas";
 import { loadKhutba } from "@/lib/supabase-khutbas";
 
@@ -39,6 +40,14 @@ export default async function KhutbaPage({ params }: PageProps) {
             >
               Слушать в Telegram ↗
             </a>
+            <ShareKhutbaCard
+              id={khutba.id}
+              title={khutba.title}
+              summary={khutba.summary}
+              imam={khutba.imam}
+              mosque={khutba.mosque}
+              city={khutba.city}
+            />
           </div>
         </div>
         <div className="detail-player">
